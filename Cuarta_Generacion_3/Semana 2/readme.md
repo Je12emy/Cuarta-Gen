@@ -1,4 +1,3 @@
-# Ejercicio de Practica
 # Ejercicios de Practica
 
 * [x] Consulta Oracle SQL que muestra los usuarios de Oracle conectados y el numero de de desiones por usuario.
