@@ -33,11 +33,10 @@ WHERE rownum < 25
 ORDER BY mb desc; -- Ejercicio 5 
 
 SELECT  s.tablespace_name,
-        SUM(s.bytes)/1024/1024 || ' MB' as used_space, -- used space
-        SUM((s.blocks * cf.block_size))/1024/1024 || ' MB' as total_size, -- asigned blocks * blocksize = total size
-        SUBSTR(d.name, 28) as DF_PATH
+        SUM(s.bytes)/1024/1024 || ' MB'                    AS used_space,-- used space 
+        SUM((s.blocks * cf.block_size))/1024/1024 || ' MB' AS total_size,-- asigned blocks * blocksize = total size 
+        SUBSTR(d.name,28)                                  AS DF_PATH
 FROM dba_segments s, v$controlfile cf, v$datafile d
-WHERE d.name LIKE '%'||s.tablespace_name||'%'
-GROUP BY s.tablespace_name, d.name; -- Ejercicio 6
-
-
+WHERE d.name LIKE '%'||s.tablespace_name||'%' 
+GROUP BY  s.tablespace_name,
+          d.name; -- Ejercicio 6 
