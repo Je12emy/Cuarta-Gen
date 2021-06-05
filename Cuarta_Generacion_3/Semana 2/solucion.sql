@@ -1,0 +1,5 @@
+SELECT username, count(*) AS session_count FROM V$SESSION WHERE username IS NOT NULL GROUP BY username;
+
+SELECT sum(BYTES)/1024/1024 AS db_size_in_mb  FROM dba_SEGMENTS;
+
+SELECT SEGMENT_NAME AS TABLE_NAME , BYTES/1024/1024 AS mb from user_segments WHERE SEGMENT_TYPE <> 'INDEX' AND SEGMENT_TYPE = 'TABLE';
