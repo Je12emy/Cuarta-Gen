@@ -14,20 +14,19 @@ FROM DBA_SEGMENTS
 WHERE SEGMENT_NAME LIKE 'CUSTOMER%'; -- Con esto se muestra la informacion sobre una tabla 
 
 SELECT  SEGMENT_NAME    AS TABLE_NAME,
-        SEGMENT_TYPE    AS SEGMENT_TYPE,
         BYTES/1024/1024 AS mb
 FROM user_segments
 WHERE rownum < 25 
 AND (SEGMENT_TYPE <> 'INDEX' AND SEGMENT_TYPE = 'TABLE'); -- Ejercicio 3 
 
-SELECT  SUM(bytes)/1024/1024 AS TABLE_SIZE_MB
+SELECT segment_name,SUM(bytes)/1024/1024 || ' MB' AS TABLE_SIZE_MB
 FROM DBA_SEGMENTS
-WHERE segment_name LIKE 'CUSTOMER%' 
-AND (segment_type='TABLE' OR segment_type = 'INDEX'); -- Ejercicio 4 
+WHERE (segment_type='TABLE' OR segment_type = 'INDEX') AND rownum < 25
+GROUP BY segment_name; -- Ejercicio 4 
 
 SELECT  segment_name,
         segment_type,
-        bytes/1024/1024 AS MB
+        bytes/1024/1024 || ' MB' AS MB
 FROM dba_segments
 WHERE rownum < 25
 ORDER BY mb desc; -- Ejercicio 5 
